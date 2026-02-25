@@ -64,5 +64,6 @@
     "source.organizeImports": "explicit",
     "source.removeUnusedImports": "explicit"
   },
-  "dotenv.enableAutocloaking": false
+  "dotenv.enableAutocloaking": false,
+  "prisma.pinToPrisma6": true
 }

@@ -11,21 +11,28 @@
     "watch:dev": "tsx --watch --env-file=.env.dev ./src/index.ts",
     "start": "node --env-file=.env .",
     "start:dev": "node --env-file=.env.dev .",
-    "organize:xp": "tsx scripts/organize-xp.ts"
+    "organize:xp": "tsx scripts/organize-xp.ts",
+    "organize:arc": "tsx scripts/create-structure.ts",
+    "seed":"npx tsx --env-file=.env prisma/seed.ts"
   },
   "dependencies": {
     "@constatic/base": "latest",
     "@magicyan/discord": "1.7.0",
+    "@prisma/adapter-pg": "^7.4.1",
+    "@prisma/client": "^7.4.1",
     "chalk": "5.6.2",
     "discord.js": "14.25.1",
+    "pg": "^8.18.0",
     "rou3": "0.7.10",
     "zod": "4.1.11"
   },
   "devDependencies": {
     "@types/node": "22.16.4",
+    "@types/pg": "^8.16.0",
+    "prisma": "^7.4.1",
+    "tsup": "^8.3.5",
     "tsx": "4.19.3",
-    "typescript": "5.9.3",
-    "tsup": "^8.3.5"
+    "typescript": "5.9.3"
   },
   "imports": {
     "#env": [

@@ -20,3 +20,4 @@
 *.exe
 *.db
 *.development.json
+/src/generated/prisma

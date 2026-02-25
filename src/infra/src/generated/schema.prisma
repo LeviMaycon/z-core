@@ -1,0 +1,105 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ============================================================
+// 🧑 PERSONAGEM
+// ============================================================
+
+model Class {
+  id          String @id
+  name        String
+  description String
+  emoji       String
+
+  strBonus  Float @default(0)
+  intBonus  Float @default(0)
+  agiBonus  Float @default(0)
+  chaBonus  Float @default(0)
+  endBonus  Float @default(0)
+  luckBonus Float @default(0)
+
+  expMultiplier   Float @default(1.0)
+  moneyMultiplier Float @default(1.0)
+
+  characters Character[]
+}
+
+// ============================================================
+// 🧑 PERSONAGEM
+// ============================================================
+
+model Character {
+  id        String  @id @default(cuid())
+  discordId String
+  guildId   String
+  name      String
+  classId   String?
+  level     Int     @default(1)
+  exp       BigInt  @default(0)
+  expToNext BigInt  @default(100)
+
+  strength     Int @default(5)
+  intelligence Int @default(5)
+  agility      Int @default(5)
+  charisma     Int @default(5)
+  endurance    Int @default(5)
+  luck         Int @default(5)
+  freePoints   Int @default(0)
+
+  health    Int @default(100)
+  maxHealth Int @default(100)
+  energy    Int @default(100)
+  maxEnergy Int @default(100)
+  hunger    Int @default(100)
+  happiness Int @default(100)
+
+  currentZoneId String   @default("city_center")
+  lastActive    DateTime @default(now())
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  class  Class?  @relation(fields: [classId], references: [id])
+  wallet Wallet?
+
+  @@unique([discordId, guildId])
+  @@index([discordId])
+}
+
+// ============================================================
+// 💰 ECONOMIA
+// ============================================================
+
+model Wallet {
+  id           String   @id @default(cuid())
+  characterId  String   @unique
+  cash         BigInt   @default(500)
+  bankBalance  BigInt   @default(0)
+  bankDebt     BigInt   @default(0)
+  totalEarned  BigInt   @default(0)
+  lastInterest DateTime @default(now())
+
+  character    Character     @relation(fields: [characterId], references: [id])
+  transactions Transaction[]
+}
+
+model Transaction {
+  id          String   @id @default(cuid())
+  walletId    String
+  type        String
+  amount      BigInt
+  description String
+  fromId      String?
+  toId        String?
+  createdAt   DateTime @default(now())
+
+  wallet Wallet @relation(fields: [walletId], references: [id])
+
+  @@index([walletId])
+}

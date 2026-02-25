@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  zcore-db:
+    image: postgres:17
+    container_name: zcore-db
+    restart: always
+    ports:
+      - "51213:5432"  # expõe o container na porta 51213
+    environment:
+      POSTGRES_USER: zcore
+      POSTGRES_PASSWORD: supersecret
+      POSTGRES_DB: zcore
+    volumes:
+      - zcore_db_data:/var/lib/postgresql/data
+
+volumes:
+  zcore_db_data:
