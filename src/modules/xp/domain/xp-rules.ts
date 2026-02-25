@@ -1,0 +1,8 @@
+export const XP_RULES = {
+    MESSAGE: 25,
+    ANSWER: 25,
+    CORRECT_ANSWER: 50,
+    DAILY_LIMIT: 500,
+    COOLDOWN_MS: 30_000,
+    MIN_LENGTH: 10,
+};
